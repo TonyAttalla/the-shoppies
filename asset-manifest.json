@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.js": "/the-shoppies/static/js/main.6482f8c9.chunk.js",
-    "main.js.map": "/the-shoppies/static/js/main.6482f8c9.chunk.js.map",
+    "main.js": "/the-shoppies/static/js/main.31920680.chunk.js",
+    "main.js.map": "/the-shoppies/static/js/main.31920680.chunk.js.map",
     "runtime-main.js": "/the-shoppies/static/js/runtime-main.4d0a0a4d.js",
     "runtime-main.js.map": "/the-shoppies/static/js/runtime-main.4d0a0a4d.js.map",
     "static/js/2.3a98487b.chunk.js": "/the-shoppies/static/js/2.3a98487b.chunk.js",
@@ -14,6 +14,6 @@
   "entrypoints": [
     "static/js/runtime-main.4d0a0a4d.js",
     "static/js/2.3a98487b.chunk.js",
-    "static/js/main.6482f8c9.chunk.js"
+    "static/js/main.31920680.chunk.js"
   ]
 }
