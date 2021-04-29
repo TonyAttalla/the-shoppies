@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.js": "/the-shoppies/static/js/main.31920680.chunk.js",
-    "main.js.map": "/the-shoppies/static/js/main.31920680.chunk.js.map",
+    "main.js": "/the-shoppies/static/js/main.a11f193d.chunk.js",
+    "main.js.map": "/the-shoppies/static/js/main.a11f193d.chunk.js.map",
     "runtime-main.js": "/the-shoppies/static/js/runtime-main.4d0a0a4d.js",
     "runtime-main.js.map": "/the-shoppies/static/js/runtime-main.4d0a0a4d.js.map",
-    "static/js/2.3a98487b.chunk.js": "/the-shoppies/static/js/2.3a98487b.chunk.js",
-    "static/js/2.3a98487b.chunk.js.map": "/the-shoppies/static/js/2.3a98487b.chunk.js.map",
+    "static/js/2.fe0ef840.chunk.js": "/the-shoppies/static/js/2.fe0ef840.chunk.js",
+    "static/js/2.fe0ef840.chunk.js.map": "/the-shoppies/static/js/2.fe0ef840.chunk.js.map",
     "static/js/3.e3d97596.chunk.js": "/the-shoppies/static/js/3.e3d97596.chunk.js",
     "static/js/3.e3d97596.chunk.js.map": "/the-shoppies/static/js/3.e3d97596.chunk.js.map",
     "index.html": "/the-shoppies/index.html",
-    "static/js/2.3a98487b.chunk.js.LICENSE.txt": "/the-shoppies/static/js/2.3a98487b.chunk.js.LICENSE.txt"
+    "static/js/2.fe0ef840.chunk.js.LICENSE.txt": "/the-shoppies/static/js/2.fe0ef840.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.4d0a0a4d.js",
-    "static/js/2.3a98487b.chunk.js",
-    "static/js/main.31920680.chunk.js"
+    "static/js/2.fe0ef840.chunk.js",
+    "static/js/main.a11f193d.chunk.js"
   ]
 }
