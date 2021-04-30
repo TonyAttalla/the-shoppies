@@ -1,11 +1,13 @@
 import { useState, useEffect, useCallback } from 'react';
 import { getMovies as apiGetMovies } from '../api/movies';
 import Search from './search';
-import find from 'lodash';
-import remove from 'lodash';
+import Banner from './banner';
+import find from 'lodash.find';
+import remove from 'lodash.remove';
 import { useToast } from '@chakra-ui/react';
 import { Skeleton } from '@chakra-ui/react';
-
+import Movie from './movie';
+import Header from './header';
 import {
   Box,
   SimpleGrid,
@@ -19,8 +21,6 @@ import {
   Switch,
 } from '@chakra-ui/react';
 
-import Movie from './movie';
-
 function Movies() {
   const localNominees = JSON.parse(localStorage.getItem('nominees')) || [];
   const [movies, setMovies] = useState([]);
@@ -31,13 +31,28 @@ function Movies() {
   const [currentPageStart, setCurrentPageStart] = useState(0);
   const [currentPageEnd, setCurrentPageEnd] = useState(0);
   const [query, setQuery] = useState('');
+  const [notification, setNotification] = useState(false);
   const [liveSearch, setLiveSearch] = useState(false);
-
   const toast = useToast();
-  //The Lord of the Rings: The
-
+  const scrollbarProps = {
+    '&::-webkit-scrollbar': {
+      width: '4px',
+    },
+    '&::-webkit-scrollbar-track': {
+      width: '6px',
+    },
+    '&::-webkit-scrollbar-thumb': {
+      background: 'white',
+      borderRadius: '24px',
+    },
+  };
   useEffect(() => {
     localStorage.setItem('nominees', JSON.stringify(nominees));
+    if (nominees.length === 5) {
+      setNotification(true);
+    } else {
+      setNotification(false);
+    }
   }, [nominees]);
 
   useEffect(() => {
@@ -60,12 +75,7 @@ function Movies() {
       });
       toast({
         title: 'Nominee added.',
-        description:
-          "You've added " +
-          "'" +
-          movieToNominate.Title +
-          "'" +
-          ' to your nominations',
+        description: "You've added '" + movieToNominate.Title + "' to your nominations",
         status: 'success',
         duration: 2000,
         isClosable: true,
@@ -75,25 +85,12 @@ function Movies() {
   };
 
   const unnominateMovie = id => {
-    console.log('unnominating');
     const newNominees = [...nominees];
-    const removedNominee = remove(
-      newNominees,
-      nominee => nominee.imdbID === id
-    )[0];
-    console.log(removedNominee);
-    console.log(newNominees);
-    //const newNominees = filter(nominees, nominee => nominee.imdbID !== id);
+    const removedNominee = remove(newNominees, nominee => nominee.imdbID === id)[0];
     setNominees([...newNominees]);
-
     toast({
       title: 'Nominee removed.',
-      description:
-        "You've removed " +
-        "'" +
-        removedNominee.Title +
-        "'" +
-        ' from your nominations',
+      description: "You've removed '" + removedNominee.Title + "' from your nominations",
       status: 'success',
       duration: 2000,
       isClosable: true,
@@ -104,8 +101,7 @@ function Movies() {
     (currentPage = 1) => {
       setLoading(true);
       setPage(currentPage);
-      apiGetMovies(currentPage, query).then(res => {
-        console.log('QUERY THAT GETS SENT IS: ', query);
+      apiGetMovies(currentPage, query.trim()).then(res => {
         let movies = res.data.Search;
         setTotalResults(res.data.totalResults);
         if (movies) {
@@ -127,144 +123,119 @@ function Movies() {
   );
 
   return (
-    <>
-      <Box width="100%">
-        <Center>
-          <Box p={10} width="90%">
-            <Search
-              loading={loading}
-              getMovies={getMovies}
-              query={query}
-              setQuery={setQuery}
-              liveSearch={liveSearch}
-            ></Search>
-            <SimpleGrid columns={[1, null, 2]} spacing={5}>
-              <Box height="80vh" marginTop={5} marginBottom={5}>
-                <Heading marginTop={7} as="h2" size="lg">
-                  {movies.length > 0 &&
-                    !loading &&
-                    'Search results (' +
-                      currentPageStart +
-                      '-' +
-                      currentPageEnd +
-                      ' of ' +
-                      totalResults +
-                      ')'}
-                  {(movies.length === 0 || loading) && 'Movies'}
-                </Heading>
-                <Box
-                  height="70vh"
-                  overflow="scroll"
-                  overflowX="hidden"
-                  overflowY="auto"
-                  css={{
-                    '&::-webkit-scrollbar': {
-                      width: '4px',
-                    },
-                    '&::-webkit-scrollbar-track': {
-                      width: '6px',
-                    },
-                    '&::-webkit-scrollbar-thumb': {
-                      background: 'white',
-                      borderRadius: '24px',
-                    },
-                  }}
-                >
-                  <Skeleton isLoaded={!loading}>
-                    {movies.map(movie => (
-                      <Movie
-                        key={movie.imdbID}
-                        name={movie.Title}
-                        year={movie.Year}
-                        id={movie.imdbID}
-                        nominateMovie={nominateMovie}
-                        nominees={false}
-                        isNominated={find(nominees, function (movieToFind) {
-                          return movieToFind.imdbID === movie.imdbID;
-                        })}
-                      ></Movie>
-                    ))}
-                  </Skeleton>
-                </Box>
-                <Flex
-                  hidden={movies.length === 0}
-                  height="12vh"
-                  alignItems="center"
-                >
-                  <Button
-                    disabled={page === 1}
-                    colorScheme="green"
-                    onClick={() => {
-                      getMovies(page - 1);
-                    }}
-                  >
-                    Back
-                  </Button>
-                  <Spacer />
-                  <Button
-                    disabled={currentPageEnd === parseInt(totalResults)}
-                    colorScheme="green"
-                    onClick={() => {
-                      getMovies(page + 1);
-                    }}
-                  >
-                    Next
-                  </Button>
-                </Flex>
-              </Box>
-              <Box height="80vh" marginTop={5} marginBottom={5}>
-                <Heading marginTop={7} as="h2" size="lg">
-                  My Nominations
-                </Heading>
-                <Box
-                  height="70vh"
-                  overflow="scroll"
-                  overflowX="hidden"
-                  overflowY="auto"
-                  css={{
-                    '&::-webkit-scrollbar': {
-                      width: '4px',
-                    },
-                    '&::-webkit-scrollbar-track': {
-                      width: '6px',
-                    },
-                    '&::-webkit-scrollbar-thumb': {
-                      background: 'white',
-                      borderRadius: '24px',
-                    },
-                  }}
-                >
-                  {nominees.map(movie => (
+    <Box width="100%">
+      <Banner isOpen={notification}></Banner>
+
+      <Center>
+        <Flex direction="column" p={10} width="90%">
+          <Header></Header>
+          <Search
+            loading={loading}
+            getMovies={getMovies}
+            query={query}
+            setQuery={setQuery}
+            liveSearch={liveSearch}
+          ></Search>
+          <SimpleGrid columns={[1, null, 2]} spacing={5}>
+            <Box marginTop={5} marginBottom={5}>
+              <Heading marginTop={7} as="h2" size="lg">
+                {movies.length > 0 &&
+                  !loading &&
+                  'Search results (' +
+                    currentPageStart +
+                    '-' +
+                    currentPageEnd +
+                    ' of ' +
+                    totalResults +
+                    ')'}
+                {(movies.length === 0 || loading) && 'Movies'}
+              </Heading>
+              <Box
+                height="50vh"
+                overflow="scroll"
+                overflowX="hidden"
+                overflowY="auto"
+                css={scrollbarProps}
+              >
+                <Skeleton isLoaded={!loading}>
+                  {movies.map(movie => (
                     <Movie
                       key={movie.imdbID}
                       name={movie.Title}
                       year={movie.Year}
                       id={movie.imdbID}
-                      isNominated
-                      nominees={true}
-                      removeMovie={unnominateMovie}
+                      nominateMovie={nominateMovie}
+                      nominees={false}
+                      isNominated={find(nominees, function (movieToFind) {
+                        return movieToFind.imdbID === movie.imdbID;
+                      })}
                     ></Movie>
                   ))}
-                </Box>
-                <Flex position="absolute" right={5} alignItems="center">
-                  <FormLabel htmlFor="live-search">
-                    <Text> Live Search?</Text>
-                  </FormLabel>
-                  <Switch
-                    value={liveSearch}
-                    onChange={e => {
-                      setLiveSearch(!liveSearch);
-                    }}
-                    colorScheme="green"
-                    id="live-search"
-                  />
-                </Flex>
+                </Skeleton>
               </Box>
-            </SimpleGrid>
-          </Box>
-        </Center>
-      </Box>
-    </>
+              <Flex hidden={movies.length === 0} height="12vh" alignItems="center">
+                <Button
+                  disabled={page === 1}
+                  colorScheme="green"
+                  onClick={() => {
+                    getMovies(page - 1);
+                  }}
+                >
+                  Back
+                </Button>
+                <Spacer />
+                <Button
+                  disabled={currentPageEnd === parseInt(totalResults)}
+                  colorScheme="green"
+                  onClick={() => {
+                    getMovies(page + 1);
+                  }}
+                >
+                  Next
+                </Button>
+              </Flex>
+            </Box>
+            <Box marginTop={5} marginBottom={5}>
+              <Heading marginTop={7} as="h2" size="lg">
+                My Nominations ({nominees.length}/5)
+              </Heading>
+              <Box
+                height="50vh"
+                overflow="scroll"
+                overflowX="hidden"
+                overflowY="auto"
+                css={scrollbarProps}
+              >
+                {nominees.map(movie => (
+                  <Movie
+                    key={movie.imdbID}
+                    name={movie.Title}
+                    year={movie.Year}
+                    id={movie.imdbID}
+                    isNominated
+                    nominees={true}
+                    removeMovie={unnominateMovie}
+                  ></Movie>
+                ))}
+              </Box>
+              <Flex position="absolute" right={5} mt="15vh" alignItems="center">
+                <FormLabel htmlFor="live-search">
+                  <Text> Live Search?</Text>
+                </FormLabel>
+                <Switch
+                  value={liveSearch}
+                  onChange={e => {
+                    setLiveSearch(!liveSearch);
+                  }}
+                  colorScheme="green"
+                  id="live-search"
+                />
+              </Flex>
+            </Box>
+          </SimpleGrid>
+        </Flex>
+      </Center>
+    </Box>
   );
 }
 export default Movies;

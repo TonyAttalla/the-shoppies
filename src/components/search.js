@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 function Search({ loading, getMovies, query, setQuery, liveSearch }) {
   useEffect(() => {
     if (liveSearch && query.length > 3) {
-      getMovies();
+      getMovies(1);
     }
   }, [query, liveSearch, getMovies]);
 
@@ -20,12 +20,17 @@ function Search({ loading, getMovies, query, setQuery, liveSearch }) {
   return (
     <Box width="100%">
       <InputGroup>
-        <InputLeftElement
-          pointerEvents="none"
-          children={<SearchIcon color="gray" />}
+        <InputLeftElement pointerEvents="none" children={<SearchIcon color="gray" />} />
+        <Input
+          type="text"
+          placeholder="Title (4+ chars)"
+          onChange={e => {
+            console.log('livesearching');
+            sendQuery(e);
+          }}
         />
-        <Input type="text" placeholder="Title" onChange={e => sendQuery(e)} />
         <Button
+          type="submit"
           hidden={liveSearch}
           isLoading={loading}
           marginLeft={5}
