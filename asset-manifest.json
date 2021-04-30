@@ -1,19 +1,20 @@
 {
   "files": {
-    "main.js": "/the-shoppies/static/js/main.a11f193d.chunk.js",
-    "main.js.map": "/the-shoppies/static/js/main.a11f193d.chunk.js.map",
-    "runtime-main.js": "/the-shoppies/static/js/runtime-main.4d0a0a4d.js",
-    "runtime-main.js.map": "/the-shoppies/static/js/runtime-main.4d0a0a4d.js.map",
-    "static/js/2.fe0ef840.chunk.js": "/the-shoppies/static/js/2.fe0ef840.chunk.js",
-    "static/js/2.fe0ef840.chunk.js.map": "/the-shoppies/static/js/2.fe0ef840.chunk.js.map",
-    "static/js/3.e3d97596.chunk.js": "/the-shoppies/static/js/3.e3d97596.chunk.js",
-    "static/js/3.e3d97596.chunk.js.map": "/the-shoppies/static/js/3.e3d97596.chunk.js.map",
+    "main.js": "/the-shoppies/static/js/main.c287b67f.chunk.js",
+    "main.js.map": "/the-shoppies/static/js/main.c287b67f.chunk.js.map",
+    "runtime-main.js": "/the-shoppies/static/js/runtime-main.a5f06605.js",
+    "runtime-main.js.map": "/the-shoppies/static/js/runtime-main.a5f06605.js.map",
+    "static/js/2.b610f865.chunk.js": "/the-shoppies/static/js/2.b610f865.chunk.js",
+    "static/js/2.b610f865.chunk.js.map": "/the-shoppies/static/js/2.b610f865.chunk.js.map",
+    "static/js/3.462f8821.chunk.js": "/the-shoppies/static/js/3.462f8821.chunk.js",
+    "static/js/3.462f8821.chunk.js.map": "/the-shoppies/static/js/3.462f8821.chunk.js.map",
     "index.html": "/the-shoppies/index.html",
-    "static/js/2.fe0ef840.chunk.js.LICENSE.txt": "/the-shoppies/static/js/2.fe0ef840.chunk.js.LICENSE.txt"
+    "static/js/2.b610f865.chunk.js.LICENSE.txt": "/the-shoppies/static/js/2.b610f865.chunk.js.LICENSE.txt",
+    "static/media/shopify.a42f997c.png": "/the-shoppies/static/media/shopify.a42f997c.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.4d0a0a4d.js",
-    "static/js/2.fe0ef840.chunk.js",
-    "static/js/main.a11f193d.chunk.js"
+    "static/js/runtime-main.a5f06605.js",
+    "static/js/2.b610f865.chunk.js",
+    "static/js/main.c287b67f.chunk.js"
   ]
 }
