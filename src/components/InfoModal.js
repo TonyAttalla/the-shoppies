@@ -20,7 +20,6 @@ function InfoModal({ isOpen, onClose, title, movieId }) {
   useEffect(() => {
     if (isOpen) {
       getMovieDetails(movieId).then(res => {
-        console.log('running useeffect');
         const response = res.data;
         const movieDetails = {};
         movieDetails['Actors'] = response.Actors;
@@ -62,10 +61,10 @@ function InfoModal({ isOpen, onClose, title, movieId }) {
                 );
               })}
             </Flex>
-            {/* <Flex alignItems="center" justifyContent="center"> */}
+            <Flex alignItems="center" justifyContent="center">
 
-            <Image objectFit="fill" src={posterURL} alt="poster" />
-            {/* </Flex> */}
+            <Image src={posterURL} alt="poster" />
+            </Flex>
           </SimpleGrid>
         </ModalBody>
         <ModalFooter display="flex">
