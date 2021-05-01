@@ -137,12 +137,11 @@ function Movies() {
           ></Search>
           <SimpleGrid columns={[1, null, 2]} spacing={5}>
             <Box marginTop={5} marginBottom={5}>
-              <Heading marginTop={7} as="h2" size="lg">
+              <Heading as="h2" size="lg">
                 {movies.length > 0 &&
                   !loading &&
-                  'Search results for "' +
-                    query +
-                    '" (' +
+                  'Search results ' +
+                    ' (' +
                     currentPageStart +
                     '-' +
                     currentPageEnd +
@@ -152,7 +151,7 @@ function Movies() {
                 {(movies.length === 0 || loading) && 'Movies'}
               </Heading>
               <Box
-                height="50vh"
+                height="60vh"
                 overflow="scroll"
                 overflowX="hidden"
                 overflowY="auto"
@@ -174,7 +173,7 @@ function Movies() {
                   ))}
                 </Skeleton>
               </Box>
-              <Flex hidden={movies.length === 0} height="12vh" alignItems="center">
+              <Flex hidden={movies.length === 0} mt={3} alignItems="center">
                 <Button
                   disabled={page === 1}
                   colorScheme="green"
@@ -197,11 +196,9 @@ function Movies() {
               </Flex>
             </Box>
             <Box marginTop={5} marginBottom={5}>
-              <Heading marginTop={7} as="h2" size="lg">
-                My Nominations ({nominees.length}/5)
-              </Heading>
+              <Heading size="lg">My Nominations ({nominees.length}/5)</Heading>
               <Box
-                height="50vh"
+                height="60vh"
                 overflow="scroll"
                 overflowX="hidden"
                 overflowY="auto"
@@ -219,7 +216,9 @@ function Movies() {
                   ></Movie>
                 ))}
               </Box>
-              <Flex position="absolute" right={5} mt="12vh" alignItems="center">
+
+              <Flex mt={3}>
+                <Spacer />
                 <FormLabel htmlFor="live-search">
                   <Text> Live Search?</Text>
                 </FormLabel>
@@ -233,6 +232,21 @@ function Movies() {
                   id="live-search"
                 />
               </Flex>
+
+              {/* <Flex position="absolute" right={5} mt="5vh" alignItems="center">
+                <FormLabel htmlFor="live-search">
+                  <Text> Live Search?</Text>
+                </FormLabel>
+                <Switch
+                  defaultIsChecked
+                  value={liveSearch}
+                  onChange={e => {
+                    setLiveSearch(!liveSearch);
+                  }}
+                  colorScheme="green"
+                  id="live-search"
+                />
+              </Flex> */}
             </Box>
           </SimpleGrid>
         </Flex>
