@@ -5,15 +5,14 @@ import { debounce } from 'lodash';
 import { useEffect } from 'react';
 function Search({ loading, getMovies, query, setQuery, liveSearch }) {
   useEffect(() => {
-    if (liveSearch && query.length > 3) {
+    if (liveSearch && query) {
       getMovies(1);
     }
   }, [query, liveSearch, getMovies]);
 
   // only update search every 300 ms so use effect doesnt run
   // every time an update is made to the search terms
-  const sendQuery = debounce(e => {
-    const newQuery = e.target.value;
+  const sendQuery = debounce(newQuery => {
     setQuery(newQuery);
   }, 300);
 
@@ -25,8 +24,10 @@ function Search({ loading, getMovies, query, setQuery, liveSearch }) {
           type="text"
           placeholder="Title (4+ chars)"
           onChange={e => {
-            console.log('livesearching');
-            sendQuery(e);
+            const newQuery = e.target.value;
+            if (newQuery.length > 3) {
+              sendQuery(newQuery);
+            }
           }}
         />
         <Button

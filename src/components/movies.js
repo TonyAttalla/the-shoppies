@@ -32,7 +32,7 @@ function Movies() {
   const [currentPageEnd, setCurrentPageEnd] = useState(0);
   const [query, setQuery] = useState('');
   const [notification, setNotification] = useState(false);
-  const [liveSearch, setLiveSearch] = useState(false);
+  const [liveSearch, setLiveSearch] = useState(true);
   const toast = useToast();
   const scrollbarProps = {
     '&::-webkit-scrollbar': {
@@ -66,7 +66,7 @@ function Movies() {
         title: 'No more nominations available.',
         description: "You've already nominated 5 movies!",
         status: 'error',
-        duration: 2000,
+        duration: 1000,
         isClosable: true,
       });
     } else {
@@ -77,7 +77,7 @@ function Movies() {
         title: 'Nominee added.',
         description: "You've added '" + movieToNominate.Title + "' to your nominations",
         status: 'success',
-        duration: 2000,
+        duration: 1000,
         isClosable: true,
       });
       setNominees([...nominees, movieToNominate]);
@@ -92,7 +92,7 @@ function Movies() {
       title: 'Nominee removed.',
       description: "You've removed '" + removedNominee.Title + "' from your nominations",
       status: 'success',
-      duration: 2000,
+      duration: 1000,
       isClosable: true,
     });
   };
@@ -125,7 +125,6 @@ function Movies() {
   return (
     <Box width="100%">
       <Banner isOpen={notification}></Banner>
-
       <Center>
         <Flex direction="column" p={10} width="90%">
           <Header></Header>
@@ -141,7 +140,9 @@ function Movies() {
               <Heading marginTop={7} as="h2" size="lg">
                 {movies.length > 0 &&
                   !loading &&
-                  'Search results (' +
+                  'Search results for "' +
+                    query +
+                    '" (' +
                     currentPageStart +
                     '-' +
                     currentPageEnd +
@@ -218,11 +219,12 @@ function Movies() {
                   ></Movie>
                 ))}
               </Box>
-              <Flex position="absolute" right={5} mt="15vh" alignItems="center">
+              <Flex position="absolute" right={5} mt="12vh" alignItems="center">
                 <FormLabel htmlFor="live-search">
                   <Text> Live Search?</Text>
                 </FormLabel>
                 <Switch
+                  defaultIsChecked
                   value={liveSearch}
                   onChange={e => {
                     setLiveSearch(!liveSearch);

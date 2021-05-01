@@ -1,17 +1,17 @@
 import { Box } from '@chakra-ui/layout';
-import { Slide } from '@chakra-ui/react';
+import { Fade, Text, Flex } from '@chakra-ui/react';
 
 function Banner({ isOpen }) {
   return (
-    <>
-      {isOpen === false && (
-        <Slide in={isOpen}>
-          <Box bg="#9ae7b5" position="absolute" h="5vh" overflow="hidden" w="100%">
-            {isOpen ? 'open' : 'not open'}
-          </Box>
-        </Slide>
-      )}
-    </>
+    <Fade in={isOpen}>
+      <Box bg="#9ae7b5" h="4vh" w="100%" p={2}>
+        <Flex alignItems="center" justifyContent="center">
+          <Text as="h4" color="black">
+            You've nominated 5 movies. Congrats!
+          </Text>
+        </Flex>
+      </Box>
+    </Fade>
   );
 }
 export default Banner;

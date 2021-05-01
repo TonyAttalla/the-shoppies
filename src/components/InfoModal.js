@@ -12,6 +12,8 @@ import { Text, SimpleGrid } from '@chakra-ui/react';
 import { SkeletonText, Box, Image, Flex, HStack } from '@chakra-ui/react';
 import { useState, useEffect } from 'react';
 import { getMovieDetails } from '../api/movies';
+import imageNotFoundPoster from '../media/poster_not_found.svg';
+
 function InfoModal({ isOpen, onClose, title, movieId }) {
   const [isLoading, setLoading] = useState(true);
   const [movieDetails, setMovieDetails] = useState({});
@@ -30,6 +32,7 @@ function InfoModal({ isOpen, onClose, title, movieId }) {
         movieDetails['Year'] = response.Year;
         movieDetails['Language'] = response.Language;
         setPosterURL(response.Poster);
+        console.log(response.Poster);
         setGenres(response.Genre.split(','));
         setMovieDetails(movieDetails);
         setLoading(false);
@@ -62,8 +65,7 @@ function InfoModal({ isOpen, onClose, title, movieId }) {
               })}
             </Flex>
             <Flex alignItems="center" justifyContent="center">
-
-            <Image src={posterURL} alt="poster" />
+              <Image src={posterURL !== 'N/A' ? posterURL : imageNotFoundPoster} alt="" />
             </Flex>
           </SimpleGrid>
         </ModalBody>
@@ -78,7 +80,6 @@ function InfoModal({ isOpen, onClose, title, movieId }) {
           </HStack>
           <Spacer></Spacer>
         </ModalFooter>
-        {/* </Skeleton> */}
       </ModalContent>
     </Modal>
   );
