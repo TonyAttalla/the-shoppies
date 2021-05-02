@@ -46,6 +46,7 @@ function Movies() {
       borderRadius: '24px',
     },
   };
+  // local storage
   useEffect(() => {
     localStorage.setItem('nominees', JSON.stringify(nominees));
     if (nominees.length === 5) {
@@ -137,7 +138,7 @@ function Movies() {
           ></Search>
           <SimpleGrid columns={[1, null, 2]} spacing={5}>
             <Box marginTop={5} marginBottom={5}>
-              <Heading as="h2" size="lg">
+              <Heading size="lg">
                 {movies.length > 0 &&
                   !loading &&
                   'Search results( ' +

@@ -23,7 +23,9 @@ My submission for the Frontend developer intern position at Shopify for Fall 202
 - Live search toggle (Search using search button or have results update as you type)
 - Search is debounced for 300ms so users can't spam the API
 - View more about a movie by clicking the info button next to it (Genres, Actors, Poster, etc...)
+- Nominations are stored in Local storage so they persist
 - Animations for actions (add movie, search, next page, etc...)
+- Notifications when adding/removing nominations
 
 ## Bugs
 
