@@ -140,8 +140,7 @@ function Movies() {
               <Heading as="h2" size="lg">
                 {movies.length > 0 &&
                   !loading &&
-                  'Search results ' +
-                    ' (' +
+                  'Search results( ' +
                     currentPageStart +
                     '-' +
                     currentPageEnd +
@@ -232,21 +231,6 @@ function Movies() {
                   id="live-search"
                 />
               </Flex>
-
-              {/* <Flex position="absolute" right={5} mt="5vh" alignItems="center">
-                <FormLabel htmlFor="live-search">
-                  <Text> Live Search?</Text>
-                </FormLabel>
-                <Switch
-                  defaultIsChecked
-                  value={liveSearch}
-                  onChange={e => {
-                    setLiveSearch(!liveSearch);
-                  }}
-                  colorScheme="green"
-                  id="live-search"
-                />
-              </Flex> */}
             </Box>
           </SimpleGrid>
         </Flex>

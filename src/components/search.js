@@ -17,7 +17,7 @@ function Search({ loading, getMovies, query, setQuery, liveSearch }) {
   }, 300);
 
   return (
-    <Box height="5vh" width="100%">
+    <Box width="100%">
       <InputGroup>
         <InputLeftElement pointerEvents="none" children={<SearchIcon color="gray" />} />
         <Input
