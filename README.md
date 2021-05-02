@@ -2,6 +2,8 @@
 
 My submission for the Frontend developer intern position at Shopify for Fall 2021
 
+https://tonyattalla.github.io/the-shoppies/
+
 ## Tech
 
 - React 17
