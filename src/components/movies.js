@@ -141,7 +141,7 @@ function Movies() {
               <Heading size="lg">
                 {movies.length > 0 &&
                   !loading &&
-                  'Search results( ' +
+                  'Search results (' +
                     currentPageStart +
                     '-' +
                     currentPageEnd +
